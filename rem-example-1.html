@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="zh_cn">
+<head>
+    <meta charset="UTF-8">
+    <title>PC端-rem布局及页面文字字体大小设置-简例.</title>
+    <style type="text/css">
+        html { font-size: 14px; }
+        body {}
+
+        .rem {
+            color: #000;
+            font-size: 2rem;
+            background-color: #5f9ea0;
+        }
+        .rem p {
+            width: 20rem;
+            /* height: 10rem; height子孙元素无法继承. */
+            line-height: 10rem; /* 子孙元素可以继承 */
+        }
+        .rem p a {
+            display: block;
+            /* 继承父元素的line-height */
+            font-size: 3rem; 
+        }
+        .rem p a span {
+            display: block;
+            width: 12rem;
+            line-height: 3rem;
+            font-size: 1.5rem;
+        }
+    </style>
+</head>
+<body>
+    <!--
+        rem: 相对于跟元素html的font-size.
+    -->
+    <div class="rem">
+        <!--
+            rem: 相对于跟元素html的font-size
+            ◇ 注: 如果当前元素没有设置font-size则会继承父元素的font-size.
+            ◇ font-size(继承自父元素)->2rem = 14px * 2, p的font-size是28px;
+            ◇ width->20rem = 14px * 20, p的width是280px;
+            ◇ line-height->10rem = 14px * 10; 280px;
+        -->
+        <p>
+            你好rem
+            <!--
+                rem: 相对于跟元素html的font-size
+                ◇ font-size->2rem = 14px * 3 = 42px.
+                ◇ width->(无法继承)
+                ◇ line-height->继承父元素(10rem = 14px * 10; 280px).
+            -->
+            <a>
+                你好rem
+                <!--
+                    rem: 相对于跟元素html的font-size
+                    ◇ font-size->1.5rem = 14px * 1.5 = 21px.
+                    ◇ width->12rem = 14px * 12 = 168px.
+                    ◇ line-height->3rem = 14px * 3 = 42px.
+                -->
+                <span>你好rem</span>
+            </a>
+        </p>
+    </div>
+</body>
+</html>
