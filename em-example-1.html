@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="zh_cn">
+<head>
+    <meta charset="UTF-8">
+    <title>em布局及页面文字字体大小设置-简例.</title>
+    <style type="text/css">
+        html { font-size: 14px; }
+        body {}
+
+        .em {
+            color: #000;
+            font-size: 2em;
+            background-color: #5f9ea0;
+        }
+        .em p {
+            width: 20em;
+            /* height: 10em; height子孙元素无法继承. */
+            line-height: 10em; /* 子孙元素可以继承 */
+        }
+        .em p a {
+            display: block;
+            width: 5em;
+            /* 继承父元素的line-height */
+            font-size: 2em; 
+        }
+        .em p a span {
+            display: block;
+            width: 4em;
+            line-height: 2em;
+            font-size: 1.5em;
+        }
+    </style>
+</head>
+<body>
+    <!--
+        注: 如果给.em设置font-size: 12px, 则下面的子元素参考父元素的font-size:12px来进行计算.
+        em相对于父元素的font-size值, 这里给html设置了font-size=14px;
+    -->
+    <div class="em">
+        <!--
+            font-size: 14px * 2;
+            ◇ font-size->如果没设置font-size, 这里继承了父层的font-size, 2em = 14px * 2, 也就是说p的font-size是28px;
+            ◇ width->10em = 14px * 2 * 20, 也就是说p的width是560px, 因为继承父元素的font-size=2em, 2em = 14px * 2;
+            ◇ line-height->10em = 28px * 10; 280px;
+        -->
+        <p>
+            你好em
+            <!-- 
+                font-size: 28px * 2;
+                ◇ font-size->a相对于父层p元素font-size, a设置了font-size: 2em, 2em = 28px * 2, 也就说a的font-size是56px;
+                ◇ width->5em = 56px * 5 = 280px;
+                ◇ line-height->继承父元素因此10em = 28px * 10; 280px;
+            -->
+            <a>
+                你好em
+                <!--
+                    font-size: 56px * 1.5;
+                    ◇ font-size->span相对于父层a元素的font-size, span设置了font-size: 1.5em, 1.5em = 56px * 1.5, 也就是说span的font-size是84px;
+                    ◇ width->84px * 4 = 336px;
+                    ◇ line-height->em = 84px * 2 = 168px;
+                    ◇ 注: 如果这里不设置line-height则会继承父元素的line-height.
+                -->
+                <span>你好em</span>
+            </a>
+        </p>
+    </div>
+</body>
+</html>
